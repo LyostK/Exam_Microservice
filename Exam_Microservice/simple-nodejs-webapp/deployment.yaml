@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: counter-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: counter-server
+  template:
+    metadata:
+      labels:
+        app: counter-server
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: minikube
+      containers:
+      - name: counter-server
+        image: wasmpot/counter-server:latest
+        ports:
+        - containerPort: 8000
